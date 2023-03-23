@@ -1,7 +1,6 @@
 input.onButtonPressed(Button.A, function () {
-    if (我出拳 == 0) {
-        我出拳 = 1
-        radio.sendValue("a", 1)
+    if (我 == 0) {
+        我 = 1
         basic.showLeds(`
             # # # # #
             . . # . #
@@ -9,32 +8,54 @@ input.onButtonPressed(Button.A, function () {
             . # . . #
             # . . # #
             `)
+        for (let index = 0; index < 20; index++) {
+            radio.sendValue(x, 1)
+            basic.pause(100)
+        }
+    }
+    if (我 == 999) {
+        x = "a"
+        我 = 0
     }
 })
 function 設定初值 () {
-    basic.showArrow(ArrowNames.East)
-    你出拳 = 0
-    我出拳 = 0
+    我 = 0
+    b = 0
+    c = 0
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        `)
 }
 function 比輸贏 () {
 	
 }
 input.onButtonPressed(Button.AB, function () {
-    if (我出拳 == 0) {
-        我出拳 = 3
+    if (我 == 0) {
+        我 = 3
         basic.showLeds(`
             # # # # #
             . . # . .
-            . # # . .
-            # . # # .
+            . # # # .
+            # . # . #
             . . # . .
             `)
-        radio.sendValue("a", 3)
+        for (let index = 0; index < 20; index++) {
+            radio.sendValue(x, 3)
+            basic.pause(100)
+        }
+        if (我 == 999) {
+            x = "c"
+            我 = 0
+        }
     }
 })
 input.onButtonPressed(Button.B, function () {
-    if (我出拳 == 0) {
-        我出拳 = 2
+    if (我 == 0) {
+        我 = 2
         basic.showLeds(`
             # # # # #
             . . # . .
@@ -42,20 +63,28 @@ input.onButtonPressed(Button.B, function () {
             # . # . #
             . . # # #
             `)
-        radio.sendValue("a", 2)
+        for (let index = 0; index < 20; index++) {
+            radio.sendValue(x, 2)
+            basic.pause(100)
+        }
+        if (我 == 999) {
+            x = "b"
+            我 = 0
+        }
     }
 })
 radio.onReceivedValue(function (name, value) {
-    你出拳 = 0
-    while (我出拳 == 0) {
-        basic.showString("？")
+    if (x == "a") {
+        if (name == "b") {
+        	
+        }
     }
-    basic.pause(1000)
-    比輸贏()
-    basic.pause(3000)
-    設定初值()
 })
-let 你出拳 = 0
-let 我出拳 = 0
-radio.setGroup(69)
+let c = 0
+let b = 0
+let x = ""
+let 我 = 0
 設定初值()
+radio.setTransmitPower(7)
+radio.setGroup(69)
+我 = 999
